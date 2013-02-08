@@ -1,0 +1,6 @@
+!This program demonstrates what we would do
+SET a = 10
+SET b = 100
+PRINT b
+SET b = 10
+PRINT b
