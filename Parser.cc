@@ -1,3 +1,7 @@
+//Author: Joshua Liben
+//Compile: g++ -Wall -o Parser.exe Parser.cc
+//Run:  ./Parser testfile.txt
+
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -5,18 +9,6 @@
 #include <algorithm>
 using namespace std;
 
-struct Variable
-{
-  string name;
-  double value;
-};
-
-struct Memory
-{
-  vector<string> instructions;
-  int position;
-  vector<Variable> variables;
-};
 
 
 int main(int argc, char ** argv) {
