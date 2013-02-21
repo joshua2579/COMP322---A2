@@ -9,10 +9,11 @@ using namespace std;
 
 Memory memory;
 
-int parseFile(ifstream f, Memory& m) {
-  char* toBePushed;
+int parseFile(ifstream& f, Memory& m) {
+  char toBePushed[200];
   f.getline(toBePushed, 200);
   m.instructions.push_back((string)toBePushed);
+  cout << m.instructions.front() << '\n';
   return 0;
 }
 
@@ -32,7 +33,7 @@ int main(int argc, char ** argv) {
   }
 
   //parse the file and execute the instructions here!
-
+  parseFile(in_file, memory);
 
 
   return 0;
