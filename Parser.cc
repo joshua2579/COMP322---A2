@@ -18,7 +18,39 @@ int parseFile(ifstream& f, Memory& m) {
     if (TEST)
       cout << m.instructions.at(m.instructions.size()-1) << '\n';
   }
-    cout << "File parsing completed succesdfully." << endl;
+  if (TEST)
+    cout << "File parsing completed succesfully." << endl;
+  return 0;
+}
+
+int execute (ifstream& f, Memory& m) {
+  int cur;
+  for (cur = 0; cur < (int)m.instructions.size(); cur++) {
+    if (TEST)
+      cout << "First char of line " << cur+1 << " is " << m.instructions.at(cur)[0] << endl;
+    if (m.instructions.at(cur)[0] == '!') {
+      if (TEST)
+        cout << "This is a comment." << endl;
+    } else if (m.instructions.at(cur)[0] == 'S'
+      && m.instructions.at(cur)[1] == 'E'
+      && m.instructions.at(cur)[2] == 'T'
+      && m.instructions.at(cur)[3] == ' ') {
+      if (TEST)
+        cout << "This is a set instruction." << endl;
+    } else if (m.instructions.at(cur)[0] == 'P'
+      && m.instructions.at(cur)[1] == 'R'
+      && m.instructions.at(cur)[2] == 'I'
+      && m.instructions.at(cur)[3] == 'N'
+      && m.instructions.at(cur)[4] == 'T'
+      && m.instructions.at(cur)[5] == ' ') {
+      if (TEST)
+        cout << "This is a print instruction." << endl;
+    } else {
+      cout << "Invalid instruction found. Terminate." << endl;
+      return 1;
+    }
+  }
+
   return 0;
 }
 
@@ -39,7 +71,7 @@ int main(int argc, char ** argv) {
 
   //parse the file and execute the instructions here!
   parseFile(in_file, memory);
-
+  execute(in_file, memory);
 
   return 0;
 }
