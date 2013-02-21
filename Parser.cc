@@ -23,6 +23,32 @@ int parseFile(ifstream& f, Memory& m) {
   return 0;
 }
 
+
+
+vector<string> tokenizer(int lineNum, Memory& m) {
+  istringstream iss(m.instructions.at(lineNum));
+  vector<string> words;
+  do {
+    string sub;
+    iss >> sub;
+    words.push_back(sub);
+  } while (iss);
+  return words;
+}
+
+int set (int lineNum, Memory& m) {
+  if (TEST)
+    cout << "Begin set command:" << endl;
+  vector<string> words = tokenizer(lineNum, m);
+  return 0;
+}
+
+int print (int lineNum, Memory& m) {
+  if (TEST)
+    cout << "Begin print command:" << endl;
+  return 0;
+}
+
 int execute (ifstream& f, Memory& m) {
   int cur;
   for (cur = 0; cur < (int)m.instructions.size(); cur++) {
@@ -37,6 +63,7 @@ int execute (ifstream& f, Memory& m) {
       && m.instructions.at(cur)[3] == ' ') {
       if (TEST)
         cout << "This is a set instruction." << endl;
+      set(cur, memory);
     } else if (m.instructions.at(cur)[0] == 'P'
       && m.instructions.at(cur)[1] == 'R'
       && m.instructions.at(cur)[2] == 'I'
@@ -45,6 +72,7 @@ int execute (ifstream& f, Memory& m) {
       && m.instructions.at(cur)[5] == ' ') {
       if (TEST)
         cout << "This is a print instruction." << endl;
+      print(cur, memory);
     } else {
       cout << "Invalid instruction found. Terminate." << endl;
       return 1;
