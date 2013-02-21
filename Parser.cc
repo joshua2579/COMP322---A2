@@ -4,11 +4,17 @@
 
 
 #include "Parser.h"
+#define STREAMSIZE 200
 using namespace std;
 
-Memory* m = new Memory();
+Memory memory;
 
-//int parseFile(ifstream in)
+int parseFile(ifstream f, Memory& m) {
+  char* toBePushed;
+  f.getline(toBePushed, 200);
+  m.instructions.push_back((string)toBePushed);
+  return 0;
+}
 
 int main(int argc, char ** argv) {
   if (argc < 2)
