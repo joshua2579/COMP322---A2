@@ -2,22 +2,27 @@
 
 #ifndef PARSER_H_
 #define PARSER_H_
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <algorithm>
 
 //Object Definitions
 struct Variable
 {
-  string name;
+  std::string name;
   double value;
 };
 
 struct Memory
 {
-  vector<string> instructions;
+  std::vector<std::string> instructions;
   int position;
-  vector<Variable> variables;
+  std::vector<Variable> variables;
 };
 
 //Function Headers
-
+int main(int argc, char ** argv);
 
 #endif /*PARSER_H_*/

@@ -2,14 +2,13 @@
 //Compile: g++ -Wall -o Parser.exe Parser.cc
 //Run:  ./Parser testfile.txt
 
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <algorithm>
+
+#include "Parser.h"
 using namespace std;
 
+Memory* m = new Memory();
 
+//int parseFile(ifstream in)
 
 int main(int argc, char ** argv) {
   if (argc < 2)
@@ -27,5 +26,8 @@ int main(int argc, char ** argv) {
   }
 
   //parse the file and execute the instructions here!
+
+
+
   return 0;
 }
