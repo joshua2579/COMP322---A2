@@ -5,15 +5,20 @@
 
 #include "Parser.h"
 #define STREAMSIZE 200
+#define TEST true //Toggle this value to view test print cases.
 using namespace std;
 
 Memory memory;
 
 int parseFile(ifstream& f, Memory& m) {
   char toBePushed[200];
-  f.getline(toBePushed, 200);
-  m.instructions.push_back((string)toBePushed);
-  cout << m.instructions.front() << '\n';
+  while (!f.eof()) {
+    f.getline(toBePushed, 200);
+    m.instructions.push_back((string)toBePushed);
+    if (TEST)
+      cout << m.instructions.at(m.instructions.size()-1) << '\n';
+  }
+    cout << "File parsing completed succesdfully." << endl;
   return 0;
 }
 
