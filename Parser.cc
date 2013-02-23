@@ -97,6 +97,14 @@ int set (int lineNum, Memory& m) {
 int print (int lineNum, Memory& m) {
   if (TEST)
     cout << "Begin print command:" << endl;
+  vector<string> words = tokenizer(lineNum, m);
+  int varIndex = variableExists(words.at(1), m);
+  if (varIndex < 0) { //Variable does not exist
+    cout << "Error: Variable " << words.at(1) << " does not exist. Exiting." << endl;
+    exit(1);
+  } else {
+    cout << m.variables.at(varIndex).value << endl;
+  }
   return 0;
 }
 
@@ -125,8 +133,8 @@ int execute (ifstream& f, Memory& m) {
         cout << "This is a print instruction." << endl;
       print(cur, memory);
     } else {
-      cout << "Invalid instruction found. Terminate." << endl;
-      return 1;
+      cout << "Error: Invalid instruction found. Exiting." << endl;
+      exit(1);
     }
   }
 
