@@ -7,7 +7,6 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include <string.h>
 
 //Object Definitions
 struct Variable

@@ -36,10 +36,48 @@ vector<string> tokenizer(int lineNum, Memory& m) {
   return words;
 }
 
+int variableExists (string var, Memory& m) {
+  for (int i = 0; i < (int)m.variables.size(); i++) {
+    if (m.variables.at(i).name.compare(var) == 0) {
+      if (TEST)
+        cout << "Variable " << var << " found a match." << endl;
+      return i;
+    }
+  }
+  if (TEST)
+    cout << "Variable " << var << " is found to be a new variable." << endl;
+  return -1;
+}
+
+int createNewVariable(string var, string value, Memory& m) {
+  Variable v;
+  v.name = var;
+  m.variables.at(m.variables.size() - 1).name = var;
+  int varValueIndex;
+  varValueIndex = variableExists(value, m);
+  if (varValueIndex >= 0) { //set one value to another value
+    v.value = m.variables.at(varValueIndex).value;
+  } else { //set variable value to some given double.
+    v.value = atof(value.c_str());
+    if (v.value == 0.0) { //invalid variable
+      cout << "Error: " << value << " not recognized as an existing variable or a value." << endl;
+    } else { //value is valid, store in list of variables.
+      m.variables.push_back(v);
+    }
+  }
+  return 0;
+}
+
 int set (int lineNum, Memory& m) {
   if (TEST)
     cout << "Begin set command:" << endl;
   vector<string> words = tokenizer(lineNum, m);
+  int varIndex = variableExists(words.at(1), m);
+  if (varIndex >= 0) {
+    //TODO: set existing variable to next one
+  } else { //create a new variable.
+    createNewVariable(words.at(1), words.at(3), m);
+  }
   return 0;
 }
 
