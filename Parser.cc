@@ -75,7 +75,19 @@ int set (int lineNum, Memory& m) {
   vector<string> words = tokenizer(lineNum, m);
   int varIndex = variableExists(words.at(1), m);
   if (varIndex >= 0) {
-    //TODO: set existing variable to next one
+    int valueIsVariable = variableExists(words.at(3), m);
+    if (valueIsVariable >= 0) { //set existing variable to another existing variable.
+      m.variables.at(varIndex).value = m.variables.at(valueIsVariable).value;
+    } else { //set existing value to some double
+      double doubleToSet = atof(words.at(3).c_str());
+      if (doubleToSet == 0.0) { //invalid value
+      cout << "Error: " << words.at(3) << " not recognized as an existing variable or a value." << endl;
+      } else {
+        m.variables.at(varIndex).value = doubleToSet;
+        if (TEST)
+          cout << "Exisitng variable " << m.variables.at(varIndex).name << " now has value " << m.variables.at(varIndex).value << endl;
+      }
+    }
   } else { //create a new variable.
     createNewVariable(words.at(1), words.at(3), m);
   }
