@@ -45,14 +45,13 @@ int variableExists (string var, Memory& m) {
     }
   }
   if (TEST)
-    cout << "Variable " << var << " is found to be a new variable." << endl;
+    cout << "Variable " << var << " is not an exisiting variable." << endl;
   return -1;
 }
 
 int createNewVariable(string var, string value, Memory& m) {
   Variable v;
   v.name = var;
-  m.variables.at(m.variables.size() - 1).name = var;
   int varValueIndex;
   varValueIndex = variableExists(value, m);
   if (varValueIndex >= 0) { //set one value to another value
@@ -65,6 +64,8 @@ int createNewVariable(string var, string value, Memory& m) {
       m.variables.push_back(v);
     }
   }
+  if (TEST)
+    cout << "New variable created: " << m.variables.back().name << " with value " << m.variables.back().value << endl;
   return 0;
 }
 
